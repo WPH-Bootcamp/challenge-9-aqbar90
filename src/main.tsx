@@ -10,11 +10,32 @@ import App from './App.tsx';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // TODO: Configure default query options
-      // Examples: refetchOnWindowFocus, retry, staleTime, etc.
+      // Cache dianggap fresh selama 5 menit
+      staleTime: 1000 * 60 * 5,
+
+      // Simpan cache selama 10 menit
+      gcTime: 1000 * 60 * 10,
+
+      // Retry sekali jika request gagal
+      retry: 1,
+
+      // Tidak refetch saat user kembali ke tab
+      refetchOnWindowFocus: false,
+
+      // Tidak refetch saat reconnect internet
+      refetchOnReconnect: true,
+
+      // Refetch saat component mount jika data sudah stale
+      refetchOnMount: true,
+    },
+
+    mutations: {
+      retry: 1,
     },
   },
 });
+// TODO: Configure default query options
+// Examples: refetchOnWindowFocus, retry, staleTime, etc.
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
