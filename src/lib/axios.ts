@@ -4,10 +4,11 @@ import axios from 'axios';
 // Hint: Use environment variables for API URL and API key
 // Reference: https://axios-http.com/docs/instance
 
-const api = axios.create({
-  // TODO: Configure baseURL from environment variable
-  // TODO: Add default headers (API key, content-type)
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_TMDB_BASE_URL,
 });
+// TODO: Configure baseURL from environment variable
+// TODO: Add default headers (API key, content-type)
 
 // TODO: Add request interceptor if needed
 // Hint: You can add API key to every request here
