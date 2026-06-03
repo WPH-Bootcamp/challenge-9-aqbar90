@@ -9,7 +9,6 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle Theme"
       className="
-        flex
         h-5
         w-5
         items-center

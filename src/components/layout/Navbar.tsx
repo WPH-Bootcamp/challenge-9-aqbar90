@@ -1,33 +1,52 @@
 import { Menu, Search, Tv } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ThemeToggle from '../ui/ThemeToggle';
 import SearchInput from '../ui/SearchInput';
 import MobileMenu from './MobileMenu';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
       <header
-        className="
-          px-4.5
+        className={cn(
+          `
+          fixed
+          top-0
+          left-0
+          px-4
           py-2xl
-          absolute
+          md:px-8xl
+          md:py-6
+          lg:px-11xl
+          lg:py-8
           z-50
           w-full
-          border-b
-          border-white/10
-          bg-black/20
-          backdrop-blur-md
-        "
+          transition-all
+          duration-300`,
+          scrolled ? 'bg-[#0A0D1299]/40 backdrop-blur-xl' : 'bg-transparent'
+        )}
       >
         <div
           className="
-            mx-auto
             flex
-            max-w-full
+            w-full
             items-center
             justify-between
           "
@@ -36,65 +55,90 @@ const Navbar = () => {
             className="
               flex
               items-center
-              gap-xs
+              gap-20
             "
           >
-            {/* Logo */}
-
-            <Tv size={20} className="text-neutral-25" fill="currentColor" />
-
-            <Link
-              to="/"
+            <div
               className="
-              text-xl
-              font-primary
-              font-bold
-              tracking-tighter
-              leading-3xl
-              text-neutral-25
-            "
+                    flex
+                    items-center
+                    gap-xs
+                    
+                  "
             >
-              Movie
-            </Link>
-          </div>
+              {/* Logo */}
 
-          {/* Desktop */}
+              <Tv size={20} className="text-neutral-25 lg:size-7" fill="currentColor" />
 
-          <div
-            className="
-              hidden
-              items-center
-              gap-12
-              md:flex
-            "
-          >
-            <nav
-              className="
-                flex
-                items-center
-                gap-8
-              "
-            >
-              <Link to="/" className="text-neutral-25">
-                Home
+              <Link
+                to="/"
+                className="
+                      text-xl
+                      font-primary
+                      font-bold
+                      tracking-tighter
+                      leading-3xl
+                      text-neutral-25
+                      lg:font-semibold
+                      lg:text-display-sm
+                    "
+              >
+                Movie
               </Link>
-
-              <Link to="/favorites" className="text-white">
-                Favorites
-              </Link>
-            </nav>
+            </div>
 
             <div
               className="
-                flex
+                hidden
+                lg:flex
                 items-center
-                gap-3
               "
             >
-              <SearchInput />
+              {/* Desktop */}
 
-              <ThemeToggle />
+              <nav
+                className="
+                hidden
+                items-center
+                md:hidden
+                lg:flex
+                lg:gap-6xl
+              "
+              >
+                <Link
+                  to="/"
+                  className="
+                text-neutral-25
+                transition-colors
+                duration-300
+                hover:text-primary-200"
+                >
+                  Home
+                </Link>
+
+                <Link
+                  to="/favorites"
+                  className="
+                  text-neutral-25
+                  transition-colors
+                  duration-300
+                  hover:text-primary-200"
+                >
+                  Favorites
+                </Link>
+              </nav>
             </div>
+          </div>
+          <div
+            className="
+              hidden
+              lg:flex
+              items-center
+              gap-3
+                "
+          >
+            <SearchInput />
+            <ThemeToggle />
           </div>
 
           {/* Mobile */}
@@ -104,7 +148,7 @@ const Navbar = () => {
               flex
               items-center
               gap-4
-              md:hidden
+              lg:hidden
             "
           >
             <button
