@@ -54,6 +54,8 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
           leading-md
           font-semibold
           text-neutral-25
+          lg:text-lg
+          lg:leading-lg
         "
       >
         {title}
@@ -80,6 +82,8 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
             text-sm
             leading-sm
             font-regular
+            lg:text-md
+            lg:leading-md
             text-neutral-400
           "
         >

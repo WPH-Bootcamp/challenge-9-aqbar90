@@ -15,24 +15,28 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
     <section
       className="
         relative
+        h-full
         min-w-screen
         overflow-hidden
       "
     >
       {/* BACKDROP */}
 
-      <img
-        src={`${IMAGE_BASE_URL}${movie.poster_path}`}
-        alt={movie.title}
-        className="
+      <picture>
+        <source media="(min-width:480px)" srcSet={`${IMAGE_BASE_URL}${movie.backdrop_path}`} />
+
+        <img
+          src={`${IMAGE_BASE_URL}${movie.poster_path}`}
+          alt={movie.title}
+          className="
           absolute
           inset-0
           h-full
           w-full
-          object-cover
+          object-center
         "
-      />
-
+        />
+      </picture>
       {/* NAVBAR */}
       <div
         className="
@@ -54,6 +58,7 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
           relative
           z-10
           flex
+          h-full
           min-w-full
           items-end
           bg-linear-to-t

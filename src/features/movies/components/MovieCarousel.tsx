@@ -57,7 +57,7 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
               gap-xl
               basis-45
               md:basis-50
-              lg:basis-47.5
+              lg:basis-50
             "
           >
             <MovieCard
