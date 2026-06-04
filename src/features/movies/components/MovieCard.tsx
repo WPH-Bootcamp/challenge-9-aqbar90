@@ -3,7 +3,7 @@ import MovieRankBadge from './MovieRankBadge';
 
 interface MovieCardProps {
   key: number;
-  rank: number;
+  rank?: number;
   title: string;
   posterPath: string;
   rating: number;
@@ -28,7 +28,7 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
           rounded-md
         "
       >
-        <MovieRankBadge rank={rank} />
+        {rank !== undefined && <MovieRankBadge rank={rank} />}
 
         <img
           src={`${IMAGE_BASE_URL}${posterPath}`}

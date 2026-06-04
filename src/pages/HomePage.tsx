@@ -1,6 +1,7 @@
 import { useTrendingMovies } from '@/features/movies/hooks/useTrendingMovies';
 import HeroBanner from '@/features/movies/components/HeroBanner';
 import TrendingSection from '@/features/movies/components/TrendingSection';
+import NewReleaseSection from '@/features/movies/components/NewReleaseSection';
 
 const HomePage = () => {
   const { data, isLoading } = useTrendingMovies();
@@ -19,6 +20,7 @@ const HomePage = () => {
     <>
       <HeroBanner movie={heroMovie} />
       <TrendingSection />
+      <NewReleaseSection />
     </>
   );
 };

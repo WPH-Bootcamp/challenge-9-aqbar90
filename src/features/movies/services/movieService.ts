@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 // Reference: https://developer.themoviedb.org/reference/intro/getting-started
 
 export const movieService = {
-  getTrendingMovies: async (): Promise<MovieResponse> => {
+  async getTrendingMovies(): Promise<MovieResponse> {
     const { data } = await api.get('/trending/movie/day', {
       params: {
         api_key: API_KEY,
@@ -50,6 +50,16 @@ export const movieService = {
       params: {
         api_key: API_KEY,
         query,
+      },
+    });
+
+    return data;
+  },
+
+  async getNowPlayingMovies(): Promise<MovieResponse> {
+    const { data } = await api.get('/movie/now_playing', {
+      params: {
+        api_key: API_KEY,
       },
     });
 

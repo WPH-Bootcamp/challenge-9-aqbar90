@@ -7,6 +7,16 @@ import axios from 'axios';
 export const api = axios.create({
   baseURL: import.meta.env.VITE_TMDB_BASE_URL,
 });
+
+api.interceptors.request.use((config) => {
+  config.params = {
+    ...config.params,
+    api_key: import.meta.env.VITE_TMDB_API_KEY,
+  };
+
+  return config;
+});
+
 // TODO: Configure baseURL from environment variable
 // TODO: Add default headers (API key, content-type)
 
