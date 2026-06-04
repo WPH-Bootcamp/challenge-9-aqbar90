@@ -18,7 +18,6 @@ const HomePage = () => {
   return (
     <>
       <HeroBanner movie={heroMovie} />
-
       <TrendingSection />
     </>
   );

@@ -18,13 +18,14 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
         group
         shrink-0
         cursor-pointer
+        gap-md
       "
     >
       <div
         className="
           relative
           overflow-hidden
-          rounded-3xl
+          rounded-md
         "
       >
         <MovieRankBadge rank={rank} />
@@ -33,7 +34,7 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
           src={`${IMAGE_BASE_URL}${posterPath}`}
           alt={title}
           className="
-            h-55
+            h-66.5
             md:h-65
             lg:h-67.5
             w-full
@@ -47,9 +48,10 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
 
       <h3
         className="
-          mt-4
+          mt-2
           line-clamp-2
-          text-xl
+          text-md
+          leading-md
           font-semibold
           text-neutral-25
         "
@@ -59,10 +61,9 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
 
       <div
         className="
-          mt-2
           flex
           items-center
-          gap-1
+          gap-xs
         "
       >
         <Star
@@ -76,6 +77,9 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
 
         <span
           className="
+            text-sm
+            leading-sm
+            font-regular
             text-neutral-400
           "
         >

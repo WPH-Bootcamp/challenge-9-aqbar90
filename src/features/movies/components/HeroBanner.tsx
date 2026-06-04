@@ -14,10 +14,8 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
   return (
     <section
       className="
-        -translate-y-25
         relative
-        h-full
-        max-w-screen
+        min-w-screen
         overflow-hidden
       "
     >
@@ -31,16 +29,7 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
           inset-0
           h-full
           w-full
-          object-cover-down
-          
-        "
-      />
-
-      {/* HERO GRADIENT */}
-      <div
-        className="
-          absolute
-          inset-0
+          object-cover
         "
       />
 
@@ -65,13 +54,12 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
           relative
           z-10
           flex
-          min-h-dvh
           min-w-full
           items-end
           bg-linear-to-t
-          from-black
+          from-background
           via-black/70
-          to-black/10
+          to-black/5
           md:pl-8xl
           md:pb-50
           lg:pt-74.5

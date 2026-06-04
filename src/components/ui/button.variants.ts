@@ -29,7 +29,6 @@ const buttonVariants = cva(
           transition-all
           duration-300
         `,
-
         movieOutline: `
           bg-[#0A0D1299]/40
           border
@@ -47,6 +46,17 @@ const buttonVariants = cva(
           transition-all
           duration-300
         `,
+        carousel: `
+        rounded-full
+        border-0
+        bg-[#0A0D12]
+        text-neutral-25
+        transition-all
+        duration-300
+        hover:bg-[#1d1d1d]
+        hover:scale-105
+        active:scale-95
+      `,
       },
       size: {
         default:

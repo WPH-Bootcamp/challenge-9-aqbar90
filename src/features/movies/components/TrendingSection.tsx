@@ -13,18 +13,21 @@ export default function TrendingSection() {
   return (
     <section
       className="
-        px-4
-        py-8
+        px-xl
+        py-5xl
+        gap-3xl
         md:px-8
         lg:px-16
       "
     >
       <h2
         className="
-          mb-6
+          mx-4
+          my-10
           text-display-xs
           font-bold
           text-neutral-25
+          leading-display-xs
         "
       >
         Trending Now
