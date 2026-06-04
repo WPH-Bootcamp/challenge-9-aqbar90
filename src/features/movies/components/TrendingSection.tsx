@@ -28,6 +28,9 @@ export default function TrendingSection() {
           font-bold
           text-neutral-25
           leading-display-xs
+          lg:text-display-lg
+          lg:leading-display-lg
+          lg:tracking-display
         "
       >
         Trending Now
