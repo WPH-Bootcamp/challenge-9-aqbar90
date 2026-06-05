@@ -1,10 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
+
 import MainLayout from '@/components/layout/MainLayout';
-import HomePage from '@/pages/HomePage';
-import MovieDetailPage from '@/pages/MovieDetailPage';
-import FavoritesPage from '@/pages/FavoritesPage';
-import NotFoundPage from '@/pages/NotFoundPage';
-import SearchPage from '@/pages/SearchPage';
+import { withSuspense } from './withSuspense';
+
+import { HomePage, FavoritesPage, MovieDetailPage, SearchPage, NotFoundPage } from './routes';
 
 export const router = createBrowserRouter([
   {
@@ -13,24 +12,24 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: withSuspense(HomePage),
       },
       {
         path: 'movie/:id',
-        element: <MovieDetailPage />,
+        element: withSuspense(MovieDetailPage),
       },
       {
         path: 'favorites',
-        element: <FavoritesPage />,
+        element: withSuspense(FavoritesPage),
       },
       {
         path: 'search',
-        element: <SearchPage />,
+        element: withSuspense(SearchPage),
       },
     ],
   },
   {
     path: '*',
-    element: <NotFoundPage />,
+    element: withSuspense(NotFoundPage),
   },
 ]);

@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
 export function getImageUrl(path: string, size: string = 'original'): string {
   // TODO: Implement image URL construction
   // Use VITE_TMDB_IMAGE_BASE_URL from environment variables
-  return '';
+  return `https://image.tmdb.org/t/p/${size}${path}`;
 }
 
 // TODO: Add more utility functions as needed
