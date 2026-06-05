@@ -61,7 +61,7 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
             "
           >
             <MovieCard
-              key={movie.id}
+              id={movie.id}
               rank={index + 1}
               title={movie.title}
               posterPath={movie.poster_path!}

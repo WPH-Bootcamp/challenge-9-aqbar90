@@ -50,3 +50,16 @@ export interface MovieCreditsResponse {
   id: number;
   cast: CastMember[];
 }
+
+export interface MovieVideo {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+}
+
+export interface MovieVideoResponse {
+  id: number;
+  results: MovieVideo[];
+}

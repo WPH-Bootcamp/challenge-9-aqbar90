@@ -1,9 +1,12 @@
 import { CalendarDays, Heart, Play, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { MovieDetail } from '../../types/movie';
-
 import videoIcon from '@/assets/icon/video.svg';
 import happySmileIcon from '@/assets/icon/emoji-happy.svg';
+
+import { useFavorites } from '@/features/movies/hooks/useFavorites';
+import { showFavoriteToast } from '@/lib/toast';
+import { useMovieVideos } from '../../hooks/useMovieVideos';
 
 interface MovieDetailHeroProps {
   movie: MovieDetail;
@@ -34,6 +37,23 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
       type: 'svg',
     },
   ] as const;
+
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  const favorite = isFavorite(movie.id);
+
+  const handleFavorite = () => {
+    const added = toggleFavorite(movie.id);
+
+    showFavoriteToast(added ? 'Success Add to Favorites' : 'Removed from Favorites');
+  };
+
+  const { data: videos } = useMovieVideos(movie.id);
+
+  const trailer = videos?.results.find(
+    (video) => video.site === 'YouTube' && video.type === 'Trailer'
+  );
+
   return (
     <section className="relative overflow-hidden">
       {/* BACKDROP */}
@@ -149,16 +169,20 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
             gap-xl
           "
         >
-          <Button
-            variant="movie"
-            className="
+          {trailer && (
+            <Button
+              variant="movie"
+              onClick={() =>
+                window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank')
+              }
+              className="
               flex-1
               h-11
               rounded-full"
-          >
-            Watch Trailer
-            <span
-              className="
+            >
+              Watch Trailer
+              <span
+                className="
                 flex
                 h-4
                 w-4
@@ -168,19 +192,20 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
                 bg-white
                 text-red-700
                 "
-            >
-              <Play
-                className="
+              >
+                <Play
+                  className="
                     size-2.5
                     fill-current
                   "
-              />
-            </span>
-          </Button>
-
+                />
+              </span>
+            </Button>
+          )}
           <Button
             variant="outline"
             size="icon"
+            onClick={handleFavorite}
             className="
               h-11
               w-11
@@ -190,11 +215,16 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
               border-white/20
               bg-black/30
               backdrop-blur-md
-              hover:bg-black/50
-              hover:border-white/40
             "
           >
-            <Heart className=" size-5 h-4 w-4 " />
+            <Heart
+              className={`
+                h-5
+                w-5
+                transition-colors
+                ${favorite ? 'fill-red-800 text-red-800' : 'text-white'}
+              `}
+            />
           </Button>
         </div>
 

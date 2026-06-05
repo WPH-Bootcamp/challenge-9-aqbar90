@@ -5,6 +5,10 @@ import type { MovieDetail } from '../../types/movie';
 import videoIcon from '@/assets/icon/video.svg';
 import happySmileIcon from '@/assets/icon/emoji-happy.svg';
 
+import { useFavorites } from '@/features/movies/hooks/useFavorites';
+import { showFavoriteToast } from '@/lib/toast';
+import { useMovieVideos } from '../../hooks/useMovieVideos';
+
 interface MovieDetailHeroProps {
   movie: MovieDetail;
 }
@@ -34,6 +38,23 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
       type: 'svg',
     },
   ] as const;
+
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  const favorite = isFavorite(movie.id);
+
+  const handleFavorite = () => {
+    const added = toggleFavorite(movie.id);
+
+    showFavoriteToast(added ? 'Success Add to Favorites' : 'Removed from Favorites');
+  };
+
+  const { data: videos } = useMovieVideos(movie.id);
+
+  const trailer = videos?.results.find(
+    (video) => video.site === 'YouTube' && video.type === 'Trailer'
+  );
+
   return (
     <section className="relative overflow-hidden">
       {/* BACKDROP */}
@@ -146,39 +167,44 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
             gap-xl
           "
             >
-              <Button
-                variant="movie"
-                className="
-                  px-9.75
-                  h-13
-                  rounded-full
-                  "
-              >
-                Watch Trailer
-                <span
+              {trailer && (
+                <Button
+                  variant="movie"
+                  onClick={() =>
+                    window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank')
+                  }
                   className="
-                flex
-                h-5
-                w-5
-                items-center
-                justify-center
-                rounded-full
-                bg-white
-                text-red-700
-                "
+                      px-9.75
+                      h-13
+                      rounded-full
+                      "
                 >
-                  <Play
+                  Watch Trailer
+                  <span
                     className="
-                    size-2.5
-                    fill-current
-                  "
-                  />
-                </span>
-              </Button>
-
+                        flex
+                        h-5
+                        w-5
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-white
+                        text-red-700
+                        "
+                  >
+                    <Play
+                      className="
+                          size-2.5
+                          fill-current
+                        "
+                    />
+                  </span>
+                </Button>
+              )}
               <Button
                 variant="outline"
                 size="icon"
+                onClick={handleFavorite}
                 className="
                   h-13
                   w-13
@@ -192,40 +218,46 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
                   hover:border-white/40
                 "
               >
-                <Heart className=" size-6 " />
+                <Heart
+                  className={`
+                    size-6
+                    transition-colors
+                    ${favorite ? 'fill-red-800 text-red-800' : 'text-white'}
+                  `}
+                />
               </Button>
             </div>
 
             {/* Stats */}
             <div
               className="
-            grid
-            grid-cols-3
-            gap-2xl
-          "
+                    grid
+                    grid-cols-3
+                    gap-2xl
+                  "
             >
               {stats.map((stat) => {
                 return (
                   <div
                     key={stat.label}
                     className="
-                  flex
-                  h-34
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  border
-                  border-neutral-800
-                  bg-black/40
-                  backdrop-blur-sm
-                "
+                          flex
+                          h-34
+                          flex-col
+                          items-center
+                          justify-center
+                          rounded-2xl
+                          border
+                          border-neutral-800
+                          bg-black/40
+                          backdrop-blur-sm
+                        "
                   >
                     {stat.type === 'lucide' ? (
                       <stat.icon
                         className={`
-                      h-7.5
-                      w-7.5
+                              h-7.5
+                              w-7.5
                       ${stat.className ?? ''}
                     `}
                       />
@@ -234,33 +266,33 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
                         src={stat.icon}
                         alt={stat.label}
                         className="
-                      h-7.5
-                      w-7.5
-                    "
+                              h-7.5
+                              w-7.5
+                            "
                       />
                     )}
 
                     <span
                       className="
-                    mt-2.25
-                    text-md
-                    leading-md
-                    font-regular
-                    font-primary
-                    text-neutral-300
-                  "
+                            mt-2.25
+                            text-md
+                            leading-md
+                            font-regular
+                            font-primary
+                            text-neutral-300
+                          "
                     >
                       {stat.label}
                     </span>
 
                     <span
                       className="
-                    text-xl
-                    leading-xl
-                    font-primary
-                    font-bold
-                    text-neutral-25
-                  "
+                            text-xl
+                            leading-xl
+                            font-primary
+                            font-bold
+                            text-neutral-25
+                          "
                     >
                       {stat.value}
                     </span>

@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './index.css';
 import App from './App.tsx';
 import { ThemeProvider } from '@/context/ThemeProvider.tsx';
+import { Toaster } from 'sonner';
 
 // TODO: Configure QueryClient with appropriate default options
 // Reference: https://tanstack.com/query/latest/docs/framework/react/reference/QueryClient
@@ -44,6 +45,7 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <App />
       </ThemeProvider>
+      <Toaster position="top-center" offset="80px" />
 
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
