@@ -1,8 +1,9 @@
 import { Star } from 'lucide-react';
 import MovieRankBadge from './MovieRankBadge';
+import { Link } from 'react-router-dom';
 
 interface MovieCardProps {
-  key: number;
+  id: number;
   rank?: number;
   title: string;
   posterPath: string;
@@ -11,29 +12,30 @@ interface MovieCardProps {
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-export default function MovieCard({ rank, title, posterPath, rating }: MovieCardProps) {
+export default function MovieCard({ id, rank, title, posterPath, rating }: MovieCardProps) {
   return (
-    <article
-      className="
+    <Link to={`/movie/${id}`} className="block">
+      <article
+        className="
         group
         shrink-0
         cursor-pointer
         gap-md
       "
-    >
-      <div
-        className="
+      >
+        <div
+          className="
           relative
           overflow-hidden
           rounded-md
         "
-      >
-        {rank !== undefined && <MovieRankBadge rank={rank} />}
+        >
+          {rank !== undefined && <MovieRankBadge rank={rank} />}
 
-        <img
-          src={`${IMAGE_BASE_URL}${posterPath}`}
-          alt={title}
-          className="
+          <img
+            src={`${IMAGE_BASE_URL}${posterPath}`}
+            alt={title}
+            className="
             h-66.5
             md:h-65
             lg:h-67.5
@@ -43,11 +45,11 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
             duration-300
             group-hover:scale-105
           "
-        />
-      </div>
+          />
+        </div>
 
-      <h3
-        className="
+        <h3
+          className="
           mt-2
           line-clamp-2
           text-md
@@ -57,28 +59,28 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
           lg:text-lg
           lg:leading-lg
         "
-      >
-        {title}
-      </h3>
+        >
+          {title}
+        </h3>
 
-      <div
-        className="
+        <div
+          className="
           flex
           items-center
           gap-xs
         "
-      >
-        <Star
-          className="
+        >
+          <Star
+            className="
             h-4
             w-4
             fill-yellow-400
             text-yellow-400
           "
-        />
+          />
 
-        <span
-          className="
+          <span
+            className="
             text-sm
             leading-sm
             font-regular
@@ -86,10 +88,11 @@ export default function MovieCard({ rank, title, posterPath, rating }: MovieCard
             lg:leading-md
             text-neutral-400
           "
-        >
-          {rating.toFixed(1)}/10
-        </span>
-      </div>
-    </article>
+          >
+            {rating.toFixed(1)}/10
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }

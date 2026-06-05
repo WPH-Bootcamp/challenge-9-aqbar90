@@ -2,6 +2,7 @@ import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Movie } from '../types/movie';
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface HeroBannerProps {
   movie: Movie;
@@ -140,8 +141,8 @@ export default function HeroBanner({ movie, children }: HeroBannerProps) {
               </span>
             </Button>
 
-            <Button variant="movieOutline" size="heroOutline">
-              See Detail
+            <Button asChild variant="movieOutline" size="heroOutline">
+              <Link to={`/movie/${movie.id}`}>See Detail</Link>
             </Button>
           </div>
         </div>

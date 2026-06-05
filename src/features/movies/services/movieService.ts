@@ -1,6 +1,7 @@
 import api from '@/lib/axios';
 // import { Movie, MovieResponse } from '@/types/movie';
 import type { MovieResponse, MovieDetail } from '@/features/movies/types/movie';
+import type { MovieCreditsResponse } from '../types/movie';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 // TODO: Create service functions to fetch data from TMDB API
@@ -13,16 +14,6 @@ export const movieService = {
         api_key: API_KEY,
       },
     });
-    return data;
-  },
-
-  async getPopularMovies(): Promise<MovieResponse> {
-    const { data } = await api.get('/movie/popular', {
-      params: {
-        api_key: API_KEY,
-      },
-    });
-
     return data;
   },
 
@@ -58,6 +49,16 @@ export const movieService = {
 
   async getNowPlayingMovies(): Promise<MovieResponse> {
     const { data } = await api.get('/movie/now_playing', {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+
+    return data;
+  },
+
+  async getMovieCredits(movieId: number): Promise<MovieCreditsResponse> {
+    const { data } = await api.get(`/movie/${movieId}/credits`, {
       params: {
         api_key: API_KEY,
       },
