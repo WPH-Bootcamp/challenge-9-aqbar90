@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useMovieDetail } from '@/features/movies/hooks/useMovieDetail';
 import { useMovieCredits } from '@/features/movies/hooks/useMovieCredits';
-import MovieDetailHero from '@/features/movies/components/MovieDetailHero';
-import CastSection from '@/features/movies/components/CastSection';
+import MovieDetailHero from '@/features/movies/components/movie-detail/MovieDetailHero';
+import CastSection from '@/features/movies/components/movie-detail/CastSection';
 
 export default function MovieDetailPage() {
   const { id } = useParams();
@@ -26,12 +26,17 @@ export default function MovieDetailPage() {
           lg:px-11xl
         "
       >
-        <div className="mt-8">
+        <div>
           <h2
             className="
               text-xl
+              leading-xl
+              font-primary
               font-bold
-              text-white
+              text-neutral-25
+              lg:text-display-md
+              lg:leading-display-md
+              lg:tracking-display
             "
           >
             Overview
@@ -39,10 +44,15 @@ export default function MovieDetailPage() {
 
           <p
             className="
-              mt-4
+              mt-2
               text-sm
-              leading-7
+              leading-sm
+              font-regular
+              font-primary
               text-neutral-400
+              lg:text-md
+              lg:leading-md
+
             "
           >
             {movie.overview}
