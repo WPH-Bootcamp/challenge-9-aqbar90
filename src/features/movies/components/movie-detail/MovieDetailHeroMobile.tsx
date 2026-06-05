@@ -1,6 +1,7 @@
 import { CalendarDays, Heart, Play, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import type { MovieDetail } from '../types/movie';
+import type { MovieDetail } from '../../types/movie';
+
 import videoIcon from '@/assets/icon/video.svg';
 import happySmileIcon from '@/assets/icon/emoji-happy.svg';
 
@@ -35,18 +36,23 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
   ] as const;
   return (
     <section className="relative overflow-hidden">
-      {/* Backdrop */}
-      <img
-        src={`${IMAGE_BASE_URL}${movie.backdrop_path}`}
-        alt={movie.title}
-        className="
+      {/* BACKDROP */}
+
+      <picture>
+        <source media="(min-width:480px)" srcSet={`${IMAGE_BASE_URL}${movie.backdrop_path}`} />
+
+        <img
+          src={`${IMAGE_BASE_URL}${movie.poster_path}`}
+          alt={movie.title}
+          className="
           absolute
           inset-0
           h-full
           w-full
-          object-cover
+          object-center
         "
-      />
+        />
+      </picture>
 
       {/* Overlay */}
       <div
@@ -67,20 +73,19 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
           px-4
           pt-24
           pb-10
-          lg:px-11xl
-          lg:pt-36
-          lg:pb-20
+          gap-xl
+          mt-55
+          bg-linear-to-t
+          from-background
+          via-black/70
+          to-black/5
         "
       >
-        {/* MOBILE FIRST */}
         <div
           className="
             flex
             items-start
             gap-4
-
-            lg:flex-row
-            lg:items-end
           "
         >
           {/* Poster */}
@@ -92,19 +97,18 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
               w-28
               rounded-xl
               object-cover
-              lg:h-72
-              lg:w-52
             "
           />
 
           {/* Content */}
-          <div className="flex-1">
+          <div className="flex flex-1 flex-col">
             <h1
               className="
-                text-3xl
+                text-xl
+                leading-xl
+                font-primary
                 font-bold
-                text-white
-                lg:text-5xl
+                text-neutral-25
               "
             >
               {movie.title}
@@ -112,11 +116,14 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
 
             <div
               className="
-                mt-3
+                mt-1
                 flex
                 items-center
-                gap-2
+                gap-1
                 text-sm
+                font-regular
+                leading-sm
+                font-primary
                 text-neutral-300
               "
             >
@@ -139,23 +146,55 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
             mt-6
             flex
             items-center
-            gap-3
+            gap-xl
           "
         >
-          <Button variant="movie" size="hero">
+          <Button
+            variant="movie"
+            className="
+              flex-1
+              h-11
+              rounded-full"
+          >
             Watch Trailer
-            <Play
+            <span
               className="
-                ml-2
+                flex
                 h-4
                 w-4
-                fill-current
-              "
-            />
+                items-center
+                justify-center
+                rounded-full
+                bg-white
+                text-red-700
+                "
+            >
+              <Play
+                className="
+                    size-2.5
+                    fill-current
+                  "
+              />
+            </span>
           </Button>
 
-          <Button variant="outline" size="icon">
-            <Heart className=" size-5 h-4 w-4" />
+          <Button
+            variant="outline"
+            size="icon"
+            className="
+              h-11
+              w-11
+              shrink-0
+              rounded-full
+              border
+              border-white/20
+              bg-black/30
+              backdrop-blur-md
+              hover:bg-black/50
+              hover:border-white/40
+            "
+          >
+            <Heart className=" size-5 h-4 w-4 " />
           </Button>
         </div>
 
@@ -206,9 +245,12 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
 
                 <span
                   className="
-                    mt-3
-                    text-sm
-                    text-neutral-400
+                    mt-2.25
+                    text-xs
+                    leading-xs
+                    font-regular
+                    font-primary
+                    text-neutral-300
                   "
                 >
                   {stat.label}
@@ -216,10 +258,11 @@ export default function MovieDetailHero({ movie }: MovieDetailHeroProps) {
 
                 <span
                   className="
-                    mt-2
-                    text-2xl
+                    text-lg
+                    leading-lg
+                    font-primary
                     font-bold
-                    text-white
+                    text-neutral-25
                   "
                 >
                   {stat.value}
