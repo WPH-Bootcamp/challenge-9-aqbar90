@@ -46,7 +46,7 @@ export default function SearchMovieCardDesktop({ movie }: SearchMovieCardProps) 
             className="
                   h-67.5
                   w-45.5
-                  rounded-md
+                  rounded-xl
                   object-cover
                 "
           />
@@ -144,7 +144,8 @@ export default function SearchMovieCardDesktop({ movie }: SearchMovieCardProps) 
         <div
           className="
           mt-6
-          flex
+          pr-2
+          flex-1
           items-center
           gap-xl
         "
@@ -154,7 +155,8 @@ export default function SearchMovieCardDesktop({ movie }: SearchMovieCardProps) 
             size="icon"
             onClick={handleFavorite}
             className="
-            mt-1
+            top-0
+            right-0
             h-11
             w-11
             shrink-0
