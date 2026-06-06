@@ -1,17 +1,23 @@
 import Navbar from '@/components/layout/Navbar';
-import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const MainLayout = () => {
+  const location = useLocation();
+
+  const hideNavbar = location.pathname === '/search-mobile';
+
+  const hideLayout = location.pathname === '/search-mobile';
+
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
 
       <main>
         <Outlet />
       </main>
 
-      <Footer />
+      {!hideLayout && <Footer />}
     </>
   );
 };

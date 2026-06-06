@@ -1,14 +1,16 @@
 import { Menu, Search, Tv } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import ThemeToggle from '../ui/ThemeToggle';
 import SearchInput from '../ui/SearchInput';
-import MobileMenu from './MobileMenu';
+import MobileMenu from '@/components/layout/MobileMenu';
+import { useNavigate } from 'react-router-dom';
+
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,9 +100,7 @@ const Navbar = () => {
 
               <nav
                 className="
-                hidden
                 items-center
-                md:hidden
                 lg:flex
                 lg:gap-6xl
               "
@@ -138,7 +138,6 @@ const Navbar = () => {
                 "
           >
             <SearchInput />
-            <ThemeToggle />
           </div>
 
           {/* Mobile */}
@@ -152,6 +151,7 @@ const Navbar = () => {
             "
           >
             <button
+              onClick={() => navigate('/search-mobile')}
               className="
               cursor-pointer
               hover:scale-110
@@ -162,8 +162,6 @@ const Navbar = () => {
               <Search size={18} className="text-neutral-25" />
             </button>
 
-            <ThemeToggle />
-
             <button
               className="
               cursor-pointer
@@ -171,9 +169,8 @@ const Navbar = () => {
               transition-all
               duration-300
             "
-              onClick={() => setMenuOpen(true)}
             >
-              <Menu size={24} className="text-neutral-25" />
+              <Menu onClick={() => setMenuOpen(true)} size={24} className="text-neutral-25" />
             </button>
           </div>
         </div>

@@ -41,12 +41,12 @@ export default function Footer() {
               gap-xs
             "
           >
-            <Tv size={28} fill="currentColor" className="text-white" />
+            <Tv size={22} fill="currentColor" className="text-white" />
 
             <span
               className="
                 font-primary
-                text-display-sm
+                text-xl
                 font-semibold
                 leading-display-sm
                 text-white

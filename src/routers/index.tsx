@@ -3,7 +3,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
 import { withSuspense } from './withSuspense';
 
-import { HomePage, FavoritesPage, MovieDetailPage, SearchPage, NotFoundPage } from './routes';
+import { FavoritesPage, MovieDetailPage, SearchPage, NotFoundPage } from './routes';
+import SearchMobile from '@/components/search/SearchMobile';
+import HomePage from '@/pages/HomePage';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: withSuspense(HomePage),
+        element: <HomePage />,
       },
       {
         path: 'movie/:id',
@@ -25,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: 'search',
         element: withSuspense(SearchPage),
+      },
+      {
+        path: 'search-mobile',
+        element: <SearchMobile />,
       },
     ],
   },
